@@ -2,6 +2,7 @@ export class TaskManager {
 	constructor() {
 		this.tasks = []
 		this.sortedTasks = []
+		this.tasks = this.loadFromLocalStorage() || []
 	}
 
 	addTask(description) {
@@ -10,10 +11,12 @@ export class TaskManager {
 			isCompleted: false,
 			isPriorityActive: false,
 		})
+		this.saveToLocalStorage()
 	}
 
 	toggleTaskCompletion(index) {
 		this.tasks[index].isCompleted = !this.tasks[index].isCompleted
+		this.saveToLocalStorage()
 	}
 
 	getPendingTasks() {
@@ -30,6 +33,16 @@ export class TaskManager {
 
 	removeTask(index) {
 		this.tasks.splice(index, 1)
+		this.saveToLocalStorage()
+	}
+
+	saveToLocalStorage() {
+		localStorage.setItem('tasks', JSON.stringify(this.tasks))
+	}
+
+	loadFromLocalStorage() {
+		const tasks = localStorage.getItem('tasks')
+		return tasks ? JSON.parse(tasks) : []
 	}
 
 	editTask(index, newDesc) {
@@ -48,6 +61,7 @@ export class TaskManager {
 
 	deleteAllTasks() {
 		this.tasks.splice(0, this.tasks.length)
+		this.saveToLocalStorage()
 	}
 
 	sortAlphabetically() {
