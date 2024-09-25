@@ -47,6 +47,7 @@ export class TaskManager {
 
 	editTask(index, newDesc) {
 		this.tasks[index].description = newDesc
+		this.saveToLocalStorage()
 	}
 
 	clearCompletedTasks() {

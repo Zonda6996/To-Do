@@ -2,12 +2,15 @@ import { TaskManager } from './taskManager.js'
 
 const taskManager = new TaskManager()
 
+const wrapper = document.querySelector('.wrapper')
 const addTaskButton = document.getElementById('addTaskButton')
 const taskInput = document.getElementById('taskInput')
 const taskList = document.getElementById('taskList')
 const deleteTaskButton = document.getElementById('deleteTaskButton')
 const settingsButton = document.getElementById('header__menu-btn')
 const headerMenu = document.querySelector('.header__menu')
+const searchInput = document.getElementById('searchInput')
+const searchButton = document.getElementById('searchButton')
 
 function renderTasks() {
 	taskList.innerHTML = ''
@@ -17,7 +20,28 @@ function renderTasks() {
 	tasks.forEach((task, index) => {
 		if (task.description.trim() !== '') {
 			const taskItem = document.createElement('li')
-			taskItem.textContent = task.description
+
+			const textSpan = document.createElement('span')
+			textSpan.classList.add('text__span')
+			textSpan.textContent = task.description
+
+			textSpan.setAttribute('title', 'Edit the Task name')
+
+			const iconSpan = document.createElement('span')
+			iconSpan.classList.add('icon__task')
+			iconSpan.setAttribute(
+				'title',
+				`Complete the task\n\nChange the task status from Completed / Uncompleted`
+			)
+
+			iconSpan.innerHTML = `<?xml version="1.0" encoding="utf-8"?>
+										<svg width="45px" height="45px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  										<path d="M21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12Z" 
+ 										stroke="#778899" 
+ 										stroke-width="0.5" 
+  										stroke-linecap="round" 
+  										stroke-linejoin="round"/>
+										</svg>`
 
 			const closeSpan = document.createElement('span')
 			closeSpan.innerHTML = '\u00d7'
@@ -47,34 +71,101 @@ function renderTasks() {
 				prioritySpan.setAttribute('title', 'Remove Importance Mark')
 			}
 
-			taskItem.classList.add(
-				task.isCompleted ? 'completed__task' : 'uncompleted__task'
-			)
-
-			taskItem.onclick = function (event) {
-				if (event.target.tagName == 'LI') {
-					taskManager.toggleTaskCompletion(index)
-				} else if (event.target.tagName == 'SPAN') {
-					event.target.parentElement.remove()
-					taskManager.removeTask(index)
-				}
-				renderTasks()
+			if (task.isCompleted) {
+				taskItem.classList.add('completed__task')
+				iconSpan.classList.add('completed__icon')
+				iconSpan.innerHTML = `<?xml version="1.0" encoding="utf-8"?>
+											<svg width="45px" height="45px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  											<path d="M8.81802 12.3107L10.9393 14.432L15.182 10.1893 M21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12Z" 
+  											stroke="#00b75c" 
+  											stroke-width="1.0" 
+  											stroke-linecap="round" 
+  											stroke-linejoin="round"/>
+											</svg>`
+			} else {
+				taskItem.classList.add('uncompleted__task')
+				iconSpan.classList.add('uncompleted__icon')
 			}
+
+			iconSpan.addEventListener('click', () => {
+				taskManager.toggleTaskCompletion(index)
+				renderTasks()
+			})
+
+			closeSpan.addEventListener('click', () => {
+				taskManager.removeTask(index)
+				renderTasks()
+			})
 
 			prioritySpan.addEventListener('click', () => {
 				task.isPriorityActive = !task.isPriorityActive
 				renderTasks()
 			})
 
+			textSpan.addEventListener('dblclick', () => {
+				const newDesc = prompt('Enter a new task name')?.trim()
+
+				if (newDesc) {
+					textSpan.textContent = newDesc
+					taskManager.editTask(index, newDesc)
+				} else {
+					alert("Task name can't be empty!")
+				}
+				renderTasks()
+			})
+
 			taskList.append(taskItem)
-			taskItem.append(closeSpan)
-			taskItem.append(prioritySpan)
+			taskItem.append(closeSpan, prioritySpan, iconSpan, textSpan)
 		}
 	})
 }
 
+function showMessage(
+	element,
+	messageText,
+	messageType = 'error',
+	duration = 5000
+) {
+	const existingMessage = document.querySelector('.task-input--message')
+
+	if (!existingMessage) {
+		let message = document.createElement('span')
+		message.classList.add('task-input--message', `message-${messageType}`)
+		message.innerHTML = messageText
+
+		element.before(message)
+
+		setTimeout(() => {
+			message.remove()
+		}, duration)
+	}
+}
+
 addTaskButton.addEventListener('click', () => {
 	const taskDescription = taskInput.value
+
+	if (taskInput.value.length > 120) {
+		showMessage(
+			addTaskButton,
+			`You have entered the max number of characters!<br>Enter ${
+				taskInput.value.length - 120
+			} characters less.`,
+			'error',
+			5000
+		)
+		return
+	}
+
+	if (taskInput.value === '') {
+		showMessage(
+			addTaskButton,
+			`The input field cannot be empty.`,
+			'warning',
+			5000
+		)
+		return
+	}
+
 	taskManager.addTask(taskDescription)
 	taskInput.value = ''
 	renderTasks()
@@ -95,6 +186,7 @@ headerMenu.addEventListener('click', event => {
 	if (action) {
 		taskManager.handleMenuAction(action)
 		headerMenu.classList.add('header__menu-hidden')
+		settingsButton.classList.remove('menu__btn-rotate')
 		renderTasks()
 	}
 })
@@ -103,11 +195,38 @@ headerMenu.addEventListener('click', event => {
 document.addEventListener('click', event => {
 	const click =
 		event.composedPath().includes(headerMenu) ||
-		event.composedPath().includes(settingsButton)
+		event.composedPath().includes(settingsButton) ||
+		event.composedPath().includes(searchButton) ||
+		event.composedPath().includes(searchInput)
 	if (!click) {
 		headerMenu.classList.add('header__menu-hidden')
 		settingsButton.classList.remove('menu__btn-rotate')
+
+		searchInput.value = ''
+		searchInput.classList.add('search__hidden')
+
+		const taskItems = Array.from(taskList.children)
+		taskItems.forEach(task => {
+			task.style.display = 'block'
+		})
 	}
+})
+
+searchButton.addEventListener('click', () => {
+	searchInput.classList.remove('search__hidden')
+	searchInput.focus()
+})
+
+// Поиск задач
+searchInput.addEventListener('input', () => {
+	const query = searchInput.value.toLowerCase()
+	const taskItems = Array.from(taskList.children)
+
+	taskItems.forEach(task => {
+		const taskText = task.querySelector('.text__span').textContent.toLowerCase()
+
+		task.style.display = taskText.includes(query) ? '' : 'none'
+	})
 })
 
 renderTasks()
