@@ -170,7 +170,7 @@ body {
   background-color: rgba(82, 0, 102, 0.411);
 }
 
-.task-input--message {
+.task-input__message {
   position: absolute;
   width: 360px;
   height: 69px;
@@ -182,7 +182,7 @@ body {
   text-align: center;
   align-items: center;
 }
-.task-input--message::before {
+.task-input__message::before {
   content: "!";
   font-size: 18px;
   margin-right: 8px;
@@ -190,7 +190,7 @@ body {
   padding: 5px 10px 5px 10px;
   border-radius: 5px;
 }
-.task-input--message:after {
+.task-input__message:after {
   content: "";
   position: absolute;
   top: 67px;
@@ -200,28 +200,29 @@ body {
   animation: runningLine 5s cubic-bezier(1, 1, 1, 1);
 }
 
-.message-error {
+.message--error {
   border: 1px solid rgba(255, 0, 0, 0.397);
   background-color: rgba(66, 0, 0, 0.37);
 }
-.message-error::before {
+.message--error::before {
   content: "!";
   color: red;
   border: 1px solid rgba(255, 0, 0, 0.397);
 }
-.message-error:after {
+.message--error:after {
   content: "";
   border: 1px solid #ff0000;
 }
 
-.message-warning {
+.message--warning {
+  padding: 20px 15px 10px 15px;
   border: 1px solid rgba(207, 159, 0, 0.39);
   background-color: rgba(121, 88, 0, 0.37);
 }
-.message-warning::before {
+.message--warning::before {
   color: orange;
 }
-.message-warning:after {
+.message--warning:after {
   content: "";
   border: 1px solid orange;
 }

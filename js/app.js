@@ -130,7 +130,7 @@ function showMessage(
 
 	if (!existingMessage) {
 		let message = document.createElement('span')
-		message.classList.add('task-input--message', `message-${messageType}`)
+		message.classList.add('task-input__message', `message--${messageType}`)
 		message.innerHTML = messageText
 
 		element.before(message)
@@ -229,4 +229,4 @@ searchInput.addEventListener('input', () => {
 	})
 })
 
-renderTasks()
+renderTasks()	
