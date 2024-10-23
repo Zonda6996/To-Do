@@ -1,0 +1,23 @@
+.header {
+	margin-top: 50px;
+}
+
+.header__container {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.header__title {
+	color: $violet-color;
+	margin-left: 10px;
+}
+
+.header__logo {
+
+	img {
+		width: 40px;
+		height: 40px;
+	}
+}

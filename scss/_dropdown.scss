@@ -1,0 +1,74 @@
+.header__options {
+	position: relative;
+	margin-left: 25px;
+}
+
+.header__options-inner {}
+
+
+
+#options-dropdown {
+	position: absolute;
+	z-index: 3;
+	display: none;
+	flex-direction: column;
+	border: 1px solid #50505069;
+	border-radius: 5px;
+	top: 40px;
+	left: 0px;
+	white-space: nowrap;
+	background-color: $menu-background;
+	box-shadow: 8px 8px 10px#000;
+}
+
+.header__options-dropdown {}
+
+.header__options-item {
+	width: 100%;
+	padding: 15px 15px 15px 37px;
+	text-align: left;
+	color: #eee;
+
+	&:before {
+		content: '';
+		position: absolute;
+		text-align: left;
+		left: 5px;
+		width: 20px;
+		height: 20px;
+	}
+
+	&:hover {
+		background-color: $menu-item-hover;
+	}
+
+	&:first-child {
+		border-bottom: 1px solid $light-slate-gray;
+	}
+
+	&:last-child {
+		border-top: 1px solid $light-slate-gray;
+	}
+
+	&[data-action="clear-completed-tasks"]::before {
+		content: '';
+		background: url(../image/icons/completed-task-dd.svg) 0px 0px no-repeat;
+		background-size: cover;
+	}
+
+	&[data-action="sort-alphabetically"]::before {
+		content: '';
+		background: url(../image/icons/sort-alph-dd.svg) 0px 0px no-repeat;
+		background-size: cover;
+	}
+
+	&[data-action="sort-by-priority"]::before {
+		content: '';
+		background: url(../image/icons/sort-prtiority-dd.svg) 0px 0px no-repeat;
+		background-size: cover;
+	}
+}
+
+.header__options-visible {
+	display: flex !important;
+}

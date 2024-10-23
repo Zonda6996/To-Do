@@ -1,0 +1,99 @@
+@import './variables';
+
+.important__button_active {
+	position: relative;
+	background: url(../image/icons/important-mark-active.svg) no-repeat;
+	background-size: cover;
+	width: 40px;
+	height: 40px;
+	z-index: 3;
+}
+
+#header__options-button {
+	cursor: pointer;
+
+	img {
+		width: 24px;
+		height: 24px;
+		z-index: 2;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 40px;
+		height: 40px;
+		border-radius: 5px;
+		background-color: #fff;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	&:hover::before {
+		opacity: 0.1;
+	}
+
+	@include highlightIcon(50%, 50%, 40px, 40px)
+}
+
+#todo-create__form-submit {
+	padding: 15px 20px;
+	margin-left: 15px;
+	background: $button-bg-violet;
+	color: #fff;
+	border-radius: 20px;
+	outline: solid transparent;
+	transition: outline 0.5s ease, color 0.5s ease;
+
+	&:hover {
+		outline: solid 1.6px $violet-outline;
+		color: $light-gray;
+	}
+}
+
+.todo-create__search-button {
+	position: absolute;
+	top: 8px;
+	right: 3px;
+	z-index: 2;
+
+	img {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+.todo-list__edit {
+	position: relative;
+
+	// Миксин на подтсветку иконки
+	@include highlightIcon(10px, 9px, 30px, 30px)
+}
+
+.todo-list__delete {
+	position: relative;
+	margin-left: 10px;
+
+	img {
+		width: 26px;
+		height: 26px;
+	}
+
+	// Миксин на подтсветку иконки
+	@include highlightIcon(13px, 13px, 35px, 35px)
+}
+
+.todo-list__important-mark {
+	position: relative;
+	margin-left: 8px;
+
+	img {
+		width: 21px;
+		height: 21px;
+	}
+
+	@include highlightIcon(11px, 10.5px, 30px, 30px)
+}

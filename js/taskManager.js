@@ -1,7 +1,5 @@
 export class TaskManager {
 	constructor() {
-		this.tasks = []
-		this.sortedTasks = []
 		this.tasks = this.loadFromLocalStorage() || []
 	}
 
@@ -19,6 +17,11 @@ export class TaskManager {
 		this.saveToLocalStorage()
 	}
 
+	toggleTaskPriority(index) {
+		this.tasks[index].isPriorityActive = !this.tasks[index].isPriorityActive
+		this.saveToLocalStorage()
+	}
+
 	getPendingTasks() {
 		return this.tasks.filter(item => !item.isCompleted)
 	}
@@ -29,6 +32,11 @@ export class TaskManager {
 
 	getAllTasks() {
 		return this.tasks
+	}
+
+	editTask(index, newDescription) {
+		this.tasks[index].description = newDescription
+		this.saveToLocalStorage()
 	}
 
 	removeTask(index) {
@@ -45,18 +53,14 @@ export class TaskManager {
 		return tasks ? JSON.parse(tasks) : []
 	}
 
-	editTask(index, newDesc) {
-		this.tasks[index].description = newDesc
+	clearCompletedTasks() {
+		this.tasks = this.tasks.filter(task => !task.isCompleted)
 		this.saveToLocalStorage()
 	}
 
-	clearCompletedTasks() {
-		this.tasks = this.tasks.filter(task => !task.isCompleted)
-	}
-
-	findTaskByDesc(str) {
+	searchTasks(query) {
 		return this.tasks.filter(task =>
-			task.description.toUpperCase().includes(str.toUpperCase())
+			task.description.toUpperCase().includes(query.toUpperCase())
 		)
 	}
 
@@ -65,28 +69,39 @@ export class TaskManager {
 		this.saveToLocalStorage()
 	}
 
-	sortAlphabetically() {
-		this.tasks.sort((a, b) => a.description.localeCompare(b.description))
-	}
-
-	sortByPriority() {
-		this.tasks.sort((a, b) => b.isPriorityActive - a.isPriorityActive)
-	}
-
-	handleMenuAction(action) {
-		switch (action) {
-			case 'clear-comp-tasks':
-				this.clearCompletedTasks()
+	sortTasks(sortType) {
+		switch (sortType) {
+			case 'alphabetically':
+				this.tasks.sort((a, b) => a.description.localeCompare(b.description))
 				break
-			case 'sort-alphabetically':
-				this.sortAlphabetically()
-				break
-			case 'sort-by-priority':
-				this.sortByPriority()
+			case 'priority':
+				this.tasks.sort((a, b) => b.isPriorityActive - a.isPriorityActive)
 				break
 			default:
-				alert('Ошибка.')
-				break
+				console.error('Invalid sort type', sortType)
+				return
 		}
+		this.saveToLocalStorage()
+	}
+	handleMenuAction(action) {
+		switch (action) {
+			case 'clear-completed-tasks':
+				this.clearCompletedTasks()
+				break
+
+			case 'sort-alphabetically':
+				this.sortTasks('alphabetically')
+				break
+
+			case 'sort-by-priority':
+				this.sortTasks('priority')
+				break
+
+			default:
+				console.error('Unknown action', action)
+		}
+		this.saveToLocalStorage()
 	}
 }
+
+export const taskManager = new TaskManager()

@@ -1,0 +1,57 @@
+@import './mixins';
+
+.todo-list {
+	margin-top: 30px;
+}
+
+.todo-list-inner {}
+
+.todo-list__item {
+	display: flex;
+	max-width: 650px;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	padding: 20px 10px 20px 20px;
+	background-color: $dark-blue-list;
+	box-shadow: 5px 5px 10px 3px #000;
+	transition: background-color 0.2s ease;
+
+	& .todo-list-content {
+		flex: 1 1 0%;
+		display: flex;
+	}
+
+	label {
+		display: block;
+	}
+
+	&:hover {
+		background-color: $dark-blue-list-hover;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 20px;
+	}
+}
+
+
+.todo-list-content {
+	margin-left: 10px;
+
+	input {
+		width: 97%;
+
+	}
+}
+
+.todo-list__actions {
+	display: flex;
+	align-items: center;
+
+	img {
+		width: 20px;
+		height: 20px;
+	}
+}
+

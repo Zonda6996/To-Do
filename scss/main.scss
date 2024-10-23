@@ -1,0 +1,24 @@
+//$ main.scss
+
+// Импортируем моудли
+
+// Утилитарные стили
+@import './variables';
+@import './mixins';
+
+// Базовые стили
+@import './reset';
+@import './typography';
+@import './global';
+
+// Стили основного контейнера
+@import './wrapper';
+
+// Стили основных компонентов
+@import './header';
+@import './dropdown';
+@import './search';
+@import './todo-create';
+@import './todo-list';
+@import './buttons';
+@import './inputs';

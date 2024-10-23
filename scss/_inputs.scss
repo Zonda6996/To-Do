@@ -1,0 +1,75 @@
+@import './variables';
+
+#todo-create__form-input-text {
+	padding: 15px;
+	border-radius: 20px;
+	border: 1px solid $violet-color;
+	color: #fff;
+	transition: border 0.5s ease-in, padding-right 0.5s ease, background-color 0.5s ease;
+
+	&:focus {
+		padding-right: 50px;
+		border: 1.5px solid $violet-focus-input;
+		background-color: $violet-hover-input;
+
+		&::placeholder {
+			opacity: 0.75;
+		}
+	}
+
+	&:hover {
+		background-color: $violet-hover-input;
+	}
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+.checkbox__custom {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	border: 2px solid $light-slate-gray;
+
+	&:after {
+		content: "";
+		position: absolute;
+		left: 7.8px;
+		top: 3.5px;
+		width: 6.5px;
+		height: 12px;
+		border: solid $light-slate-gray;
+		border-width: 0 2px 2px 0;
+		transform: rotate(45deg);
+		opacity: 0;
+		transition: opacity 0.2s ease-in-out;
+	}
+}
+
+
+input:checked~.checkbox__custom:after {
+	opacity: 1;
+}
+
+#todo-create__search-input {
+	position: relative;
+	padding: 10px;
+	padding-right: 30px;
+	box-sizing: border-box;
+	border: 1px solid #77889950;
+	border-bottom: 1px solid $light-slate-gray;
+	z-index: 1;
+
+	&:focus {
+		border-bottom: 1px solid $violet-focus-input;
+
+		&::placeholder {
+			opacity: 0.75;
+		}
+	}
+}

@@ -1,0 +1,32 @@
+$body-bg: linear-gradient(180deg,
+		hsl(0deg 0% 0%) 0%,
+		hsl(227deg 13% 4%) 13%,
+		hsl(227deg 30% 7%) 25%,
+		hsl(227deg 54% 9%) 37%,
+		hsl(227deg 88% 9%) 50%,
+		hsl(227deg 81% 11%) 63%,
+		hsl(228deg 76% 14%) 75%,
+		hsl(228deg 70% 16%) 87%,
+		hsl(228deg 65% 18%) 100%);
+
+$button-bg-violet: linear-gradient(45deg,
+		hsl(278deg 100% 20%) 0%,
+		hsl(280deg 100% 24%) 14%,
+		hsl(281deg 100% 29%) 29%,
+		hsl(283, 100%, 33%) 43%,
+		hsl(284deg 100% 37%) 57%,
+		hsl(286deg 100% 41%) 71%,
+		hsl(287deg 100% 46%) 86%,
+		hsl(289, 100%, 50%) 100%);
+
+$violet-color: rgb(92, 6, 103);
+$violet-focus-input: rgb(173, 13, 195);
+$violet-hover-input: rgba(82, 0, 102, 0.411);
+$violet-outline: rgb(225, 1, 255);
+$dark-blue-list: rgb(11, 18, 49);
+$dark-blue-list-hover: rgb(16, 25, 70);
+$light-gray: #cecece;
+$light-slate-gray: #778899;
+$spring-green: #00b75c;
+$menu-background: #1f1f1f50;
+$menu-item-hover: #50505050;

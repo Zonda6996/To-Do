@@ -1,0 +1,11 @@
+@import './variables';
+
+body {
+	background-image: $body-bg;
+}
+
+.container {
+	max-width: 850px;
+	padding: 0 15px;
+	margin: 0 auto;
+}

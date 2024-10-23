@@ -1,0 +1,19 @@
+@mixin highlightIcon($top, $left, $width, $height) {
+	&::before {
+		content: '';
+		position: absolute;
+		top: $top;
+		left: $left;
+		width: $width;
+		height: $height;
+		border-radius: 5px;
+		background-color: #fff;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	&:hover::before {
+		opacity: 0.1;
+	}
+}
