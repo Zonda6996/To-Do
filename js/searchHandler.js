@@ -1,19 +1,16 @@
-import { renderTasks } from './taskRenderer.js'
-
-// Функция поиска задач
 export function searchHandler() {
 	// Получаем поле ввода для поиска
-	const searchInput = document.getElementById('todo-create__search-input')
+	const searchInput = document.getElementById('header__search-input')
 
 	searchInput.addEventListener(
 		'input',
 		debounce(() => {
+			// Получаем текст из поля ввода
+			const searchQuery = searchInput.value.toLowerCase()
+
 			// Получаем все задачи
 			const taskList = document.querySelector('.todo-list-inner')
 			const taskItems = Array.from(taskList.children)
-
-			// Получаем текст из поля ввода
-			const searchQuery = searchInput.value.toLowerCase()
 
 			// Отображаем/скрываем задачи в зависимости от результата поиска
 			taskItems.forEach(taskItem => {
@@ -26,10 +23,37 @@ export function searchHandler() {
 		}, 300)
 	)
 
-	const searchButton = document.querySelector('.todo-create__search-button')
+	// Отображаем икноку удаления текста в поле ввода при поиске
+	const searchInputClear = document.querySelector('.header__search-clear')
+	searchInput.addEventListener('input', e => {
+		if (searchInput.value.length > 0) {
+			searchInputClear.classList.add('header__search-clear--visible')
+		} else {
+			searchInputClear.classList.remove('header__search-clear--visible')
+		}
+
+		searchInputClear.addEventListener('click', () => {
+			e.preventDefault()
+
+			searchInput.value = ''
+			searchInputClear.classList.remove('header__search-clear--visible')
+			searchInput.focus()
+
+			const taskList = document.querySelector('.todo-list-inner')
+			const taskItems = Array.from(taskList.children)
+
+			taskItems.forEach(taskItem => (taskItem.style.display = ''))
+		})
+	})
+
+	const searchButton = document.querySelector('.header__search-button')
 
 	searchButton.addEventListener('click', e => {
 		e.preventDefault()
+
+		searchInput.classList.add('header__search-visible')
+		searchButton.classList.remove('header__search-button-input--hidden')
+		searchInput.focus()
 	})
 }
 

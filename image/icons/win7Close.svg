@@ -1,0 +1,31 @@
+<svg width="31" height="17" viewBox="0 0 31 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="30" height="16" rx="1.5" stroke="#431422"/>
+<rect x="1" y="1" width="29" height="15" rx="1" fill="url(#paint0_linear_332_886)"/>
+<rect x="1" y="1" width="29" height="15" rx="1" fill="url(#paint1_radial_332_886)" style="mix-blend-mode:overlay"/>
+<rect x="1.5" y="1.5" width="28" height="14" rx="0.5" stroke="white" stroke-opacity="0.5"/>
+<path d="M1 2C1 1.44772 1.44772 1 2 1H29C29.5523 1 30 1.44772 30 2V8H1V2Z" fill="white" fill-opacity="0.5"/>
+<mask id="mask0_332_886" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="29" height="7">
+<path d="M1 2C1 1.44772 1.44772 1 2 1H29C29.5523 1 30 1.44772 30 2V8H1V2Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_332_886)">
+<rect x="1.5" y="1.5" width="28" height="14" rx="0.5" stroke="white" stroke-opacity="0.5"/>
+</g>
+<path d="M11 4.5C10.8047 4.5 10.6273 4.61367 10.5457 4.79107C10.4642 4.96847 10.4933 5.17714 10.6204 5.3254L13.3415 8.5L10.6204 11.6746C10.4933 11.8229 10.4642 12.0315 10.5457 12.2089C10.6273 12.3863 10.8047 12.5 11 12.5H14C14.1574 12.5 14.3056 12.4259 14.4 12.3L15.5 10.8333L16.6 12.3C16.6944 12.4259 16.8426 12.5 17 12.5H20C20.1953 12.5 20.3727 12.3863 20.4543 12.2089C20.5358 12.0315 20.5067 11.8229 20.3796 11.6746L17.6585 8.5L20.3796 5.3254C20.5067 5.17714 20.5358 4.96847 20.4543 4.79107C20.3727 4.61367 20.1953 4.5 20 4.5H17C16.8426 4.5 16.6944 4.5741 16.6 4.7L15.5 6.16667L14.4 4.7C14.3056 4.5741 14.1574 4.5 14 4.5H11Z" fill="url(#paint2_linear_332_886)" stroke="#535666" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_332_886" x1="15.5" y1="1" x2="15.5" y2="16" gradientUnits="userSpaceOnUse">
+<stop stop-color="#E5934D"/>
+<stop offset="0.466345" stop-color="#D22302"/>
+<stop offset="1" stop-color="#E5934D"/>
+</linearGradient>
+<radialGradient id="paint1_radial_332_886" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(15.5 16) rotate(-90) scale(2.5 14.5)">
+<stop stop-color="#F6EE92"/>
+<stop offset="1" stop-color="#E5934D" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="paint2_linear_332_886" x1="15.5" y1="5" x2="15.5" y2="12" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="0.428013" stop-color="#FAFAFA"/>
+<stop offset="0.428571" stop-color="#E9E9E9"/>
+<stop offset="1" stop-color="#D7D7D7"/>
+</linearGradient>
+</defs>
+</svg>

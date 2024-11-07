@@ -78,7 +78,7 @@ export function renderTasks() {
 		if (task.isPriorityActive) {
 			importantTaskIcon.classList.add('important__button_active')
 		}
-		
+
 		// При клике на кнопку пометки как важной, меняем состояние важности
 		importantTaskButton.addEventListener('click', () => {
 			eventHandlers.handleSetPriority(index)

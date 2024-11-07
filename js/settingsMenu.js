@@ -28,9 +28,7 @@ export function settingsMenu() {
 	})
 
 	document.addEventListener('click', e => {
-		if (
-			!optionsDropDown.contains(e.target)
-		) {
+		if (!optionsDropDown.contains(e.target)) {
 			optionsDropDown.classList.remove('header__options-visible')
 		}
 	})

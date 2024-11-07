@@ -13,6 +13,7 @@
 	</head>
 	<body>
 		<div class="wrapper">
+			<div id="notification-container"></div>
 			<header class="header">
 				<div class="container header__container">
 					<div class="header__logo">
@@ -48,6 +49,31 @@
 							</div>
 						</div>
 					</div>
+					<div class="header__search">
+						<form action="#" class="header__search-content">
+							<input
+								type="text"
+								name="search"
+								title="Search"
+								autocomplete="off"
+								id="header__search-input"
+								placeholder="Search for..."
+							/>
+							<div class="header__search-buttons">
+								<button
+									class="header__search-button header__search-button-input--hidden"
+								>
+									<img src="./image/icons/search.svg" alt="Search" />
+								</button>
+								<button class="header__search-clear">
+									<img
+										src="./image/icons/delete-task.svg"
+										alt="Search Input Delete"
+									/>
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</header>
 
@@ -69,21 +95,6 @@
 								value="Add Task"
 							/>
 						</form>
-						<div class="todo-create__search">
-							<form action="#" class="todo-create__search-content">
-								<input
-									type="text"
-									name="search"
-									title="Search"
-									autocomplete="off"
-									id="todo-create__search-input"
-									placeholder="Search for..."
-								/>
-								<button class="todo-create__search-button">
-									<img src="./image/icons/search.svg" alt="Search" />
-								</button>
-							</form>
-						</div>
 					</div>
 				</div>
 			</section>

@@ -3,13 +3,14 @@
 .todo-create {
 	margin-top: 50px;
 	align-items: center;
+	position: relative;
 }
 
 .todo-create-inner {
-	// display: flex;
-	// align-items: center;
-	// justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
 }
 
-#todo-create__form {
-}
+#todo-create__form {}

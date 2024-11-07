@@ -1,5 +1,3 @@
-@import './variables';
-
 .important__button_active {
 	position: relative;
 	background: url(../image/icons/important-mark-active.svg) no-repeat;
@@ -46,6 +44,7 @@
 	color: #fff;
 	border-radius: 20px;
 	outline: solid transparent;
+	box-shadow: 2px 3px 13px 0px #000;
 	transition: outline 0.5s ease, color 0.5s ease;
 
 	&:hover {
@@ -54,7 +53,11 @@
 	}
 }
 
-.todo-create__search-button {
+.header__search-buttons {
+	display: flex;
+}
+
+.header__search-button {
 	position: absolute;
 	top: 8px;
 	right: 3px;
@@ -63,6 +66,24 @@
 	img {
 		width: 24px;
 		height: 24px;
+	}
+}
+
+.header__search-clear {
+	display: none;
+
+	position: absolute;
+	top: 8px;
+	right: 33px;
+	z-index: 2;
+
+	img {
+		width: 24px;
+		height: 24px;
+	}
+
+	&.header__search-clear--visible {
+		display: block;
 	}
 }
 

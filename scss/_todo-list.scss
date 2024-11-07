@@ -6,12 +6,17 @@
 
 .todo-list-inner {}
 
+.todo-list__item-selected {
+	background-color: rgb(18, 29, 78) !important;
+}
+
 .todo-list__item {
 	display: flex;
 	max-width: 650px;
 	justify-content: center;
 	text-align: center;
 	align-items: center;
+	margin-bottom: 20px;
 	padding: 20px 10px 20px 20px;
 	background-color: $dark-blue-list;
 	box-shadow: 5px 5px 10px 3px #000;
@@ -28,10 +33,6 @@
 
 	&:hover {
 		background-color: $dark-blue-list-hover;
-	}
-
-	&:not(:last-child) {
-		margin-bottom: 20px;
 	}
 }
 
@@ -54,4 +55,3 @@
 		height: 20px;
 	}
 }
-

@@ -4,13 +4,15 @@
 	padding: 15px;
 	border-radius: 20px;
 	border: 1px solid $violet-color;
+	box-shadow: 2px 3px 13px 0px #000;
 	color: #fff;
-	transition: border 0.5s ease-in, padding-right 0.5s ease, background-color 0.5s ease;
+	transition: border 0.5s ease-in, padding-right 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease-in;
 
 	&:focus {
 		padding-right: 50px;
 		border: 1.5px solid $violet-focus-input;
 		background-color: $violet-hover-input;
+		box-shadow: 5px 5px 11px 0px $violet-hover-input;
 
 		&::placeholder {
 			opacity: 0.75;
@@ -56,11 +58,10 @@ input:checked~.checkbox__custom:after {
 	opacity: 1;
 }
 
-#todo-create__search-input {
+#header__search-input {
+	display: none;
 	position: relative;
-	padding: 10px;
-	padding-right: 30px;
-	box-sizing: border-box;
+	padding: 10px 60px 9px 10px;
 	border: 1px solid #77889950;
 	border-bottom: 1px solid $light-slate-gray;
 	z-index: 1;
