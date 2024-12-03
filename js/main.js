@@ -5,6 +5,7 @@ import { settingsMenu } from './settingsMenu.js'
 import { searchHandler } from './searchHandler.js'
 import { taskSelection } from './eventHandlers.js'
 import * as errorHandler from './errorHandler.js'
+import { dragAndDrop } from './drag&drop.js'
 // import { messageHandler } from './messageHandler.js'
 // import { eventHandlers } from './eventHandlers.js'
 
@@ -39,8 +40,9 @@ window.addEventListener('load', () => {
 	// Инициализируем меню настроек
 	settingsMenu()
 
+	// Выделение задач
+	taskSelection()
+
 	// Рендиерим задачи
 	renderTasks()
-
-	taskSelection()
 })

@@ -16,12 +16,23 @@ function handleDeleteTask(index) {
 }
 
 // Обработчик для редактирования названия задачи
-function handleEditTask(index, content) {
+function handleEditTask(index, content, event) {
 	const input = content.querySelector('input')
 	const originalDescription = input.value
 
+	// Получаем текущий элемент задачи
+	const currTaskItem = event.target.closest('.todo-list__item')
+
+	if (!currTaskItem) return // Если не текущий элемент, выходим
+
+	// Разрешаем редактирование текста и добавляем соответствующий класс
 	input.removeAttribute('readonly')
 	input.focus()
+	currTaskItem.classList.add('todo-list__item-editing')
+
+	// Устанавливаем курсор в конец текст и выделяем его
+	input.setSelectionRange(input.value.length, input.value.length)
+	input.select()
 
 	// Проверяем валидность названия задачи
 	function validateAndUpdateTask(e) {
@@ -37,7 +48,9 @@ function handleEditTask(index, content) {
 			taskManager.editTask(index, newValue)
 		}
 
+		// Удаляем редактирование и класс
 		input.setAttribute('readonly', true)
+		currTaskItem.classList.remove('todo-list__item-editing')
 		renderTasks()
 	}
 

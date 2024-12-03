@@ -1,4 +1,5 @@
 @import './variables';
+@import './animations';
 
 #todo-create__form-input-text {
 	padding: 15px;
@@ -37,34 +38,48 @@ input[type="checkbox"] {
 	height: 25px;
 	border-radius: 50%;
 	border: 2px solid $light-slate-gray;
+	transition: border-color 0.4s ease;
 
 	&:after {
 		content: "";
 		position: absolute;
-		left: 7.8px;
-		top: 3.5px;
-		width: 6.5px;
-		height: 12px;
+		left: 8.2px;
+		top: 3.1px;
+		width: 6.4px;
+		height: 13px;
 		border: solid $light-slate-gray;
 		border-width: 0 2px 2px 0;
 		transform: rotate(45deg);
 		opacity: 0;
-		transition: opacity 0.2s ease-in-out;
+		transition: border-color 0.4s ease, opacity 0.4s ease;
+	}
+
+	&:hover {
+		border-color: $green-completed;
+	}
+}
+
+input:checked~.checkbox__custom {
+	border-color: $green-completed;
+
+	&:after {
+		opacity: 1;
+		border: solid $green-completed;
+		border-width: 0 2px 2px 0;
+
 	}
 }
 
 
-input:checked~.checkbox__custom:after {
-	opacity: 1;
-}
-
 #header__search-input {
-	display: none;
 	position: relative;
+	opacity: 0;
+	visibility: hidden;
 	padding: 10px 60px 9px 10px;
 	border: 1px solid #77889950;
 	border-bottom: 1px solid $light-slate-gray;
 	z-index: 1;
+	transition: opacity 0.75s ease, visibility 0.75s ease;
 
 	&:focus {
 		border-bottom: 1px solid $violet-focus-input;
@@ -72,5 +87,10 @@ input:checked~.checkbox__custom:after {
 		&::placeholder {
 			opacity: 0.75;
 		}
+	}
+
+	&.visible {
+		opacity: 1;
+		visibility: visible;
 	}
 }

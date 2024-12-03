@@ -4,12 +4,24 @@ export class TaskManager {
 	}
 
 	addTask(description) {
+		const createdAt = new Date().getTime() // Таймштамп
+
 		this.tasks.push({
 			description: description,
 			isCompleted: false,
 			isPriorityActive: false,
+			createdAt: createdAt,
 		})
 		this.saveToLocalStorage()
+	}
+
+	saveToLocalStorage() {
+		localStorage.setItem('tasks', JSON.stringify(this.tasks))
+	}
+
+	loadFromLocalStorage() {
+		const tasks = localStorage.getItem('tasks')
+		return tasks ? JSON.parse(tasks) : []
 	}
 
 	toggleTaskCompletion(index) {
@@ -44,15 +56,6 @@ export class TaskManager {
 		this.saveToLocalStorage()
 	}
 
-	saveToLocalStorage() {
-		localStorage.setItem('tasks', JSON.stringify(this.tasks))
-	}
-
-	loadFromLocalStorage() {
-		const tasks = localStorage.getItem('tasks')
-		return tasks ? JSON.parse(tasks) : []
-	}
-
 	clearCompletedTasks() {
 		this.tasks = this.tasks.filter(task => !task.isCompleted)
 		this.saveToLocalStorage()
@@ -72,11 +75,22 @@ export class TaskManager {
 	sortTasks(sortType) {
 		switch (sortType) {
 			case 'alphabetically':
-				this.tasks.sort((a, b) => a.description.localeCompare(b.description))
+				this.tasks.sort(
+					(a, b) =>
+						b.isPriorityActive -
+						a.isPriorityActive +
+						a.description.localeCompare(b.description)
+				)
 				break
+
 			case 'priority':
 				this.tasks.sort((a, b) => b.isPriorityActive - a.isPriorityActive)
 				break
+
+			case 'date':
+				this.tasks.sort((a, b) => b.createdAt - a.createdAt)
+				break
+
 			default:
 				console.error('Invalid sort type', sortType)
 				return
@@ -95,6 +109,10 @@ export class TaskManager {
 
 			case 'sort-by-priority':
 				this.sortTasks('priority')
+				break
+
+			case 'sort-by-date':
+				this.sortTasks('date')
 				break
 
 			default:

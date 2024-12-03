@@ -1,12 +1,12 @@
 import { taskManager } from './taskManager.js'
 import * as eventHandlers from './eventHandlers.js'
+import { dragAndDrop } from './drag&drop.js'
 
 // Функция для отрисовки списка задач
 
 export function renderTasks() {
 	// Контейнер для списка задач
 	const todoList = document.querySelector('.todo-list-inner')
-
 	// Получение списка всех задач из менеджера задач
 	const tasks = taskManager.getAllTasks()
 
@@ -48,6 +48,11 @@ export function renderTasks() {
 			eventHandlers.handleToggleCompletion(index)
 		)
 
+		if (task.isCompleted) {
+			taskItem.classList.toggle('todo-list__task-completed')
+			// taskItem.classList.toggle('todo_list__item-completed--animation')
+		}
+
 		// Добавляем классы для каждого элемента
 		content.classList.add('todo-list-content')
 		actions.classList.add('todo-list__actions')
@@ -67,7 +72,7 @@ export function renderTasks() {
 
 		// Добавляем обработчики событий для кнопок
 		editTaskButton.addEventListener('click', () =>
-			eventHandlers.handleEditTask(index, content)
+			eventHandlers.handleEditTask(index, content, event)
 		)
 
 		deleteTaskButton.addEventListener('click', () =>
@@ -76,7 +81,9 @@ export function renderTasks() {
 
 		// Если задача важная, добавляем соответствующий класс
 		if (task.isPriorityActive) {
-			importantTaskIcon.classList.add('important__button_active')
+			importantTaskIcon.classList.toggle('important__button_active')
+			importantTaskButton.classList.toggle('important__button-active--visible')
+			taskItem.classList.toggle('todo-list__item-important')
 		}
 
 		// При клике на кнопку пометки как важной, меняем состояние важности
@@ -99,6 +106,8 @@ export function renderTasks() {
 
 		todoList.append(taskItem)
 	})
+
+	dragAndDrop()
 }
 
 renderTasks()

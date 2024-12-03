@@ -19,16 +19,19 @@ $button-bg-violet: linear-gradient(45deg,
 		hsl(287deg 100% 46%) 86%,
 		hsl(289, 100%, 50%) 100%);
 
-$violet-color: rgb(92, 6, 103);
-$violet-focus-input: rgb(173, 13, 195);
-$violet-hover-input: rgba(82, 0, 102, 0.411);
-$violet-outline: rgb(225, 1, 255);
-$dark-blue-list: rgb(11, 18, 49);
-$dark-blue-list-hover: rgb(16, 25, 70);
+$task-item-width: 620px;
+$violet-color: #5c0667;
+$violet-focus-input: #ad0dc3;
+$violet-hover-input: #52006669;
+$violet-outline: #e101ff;
+$violet-outline-active: #ad0dc3;
+$dark-blue-list: #0b1231;
+$dark-blue-list-hover: #101946;
 $light-gray: #cecece;
 $light-slate-gray: #778899;
-$spring-green: #00b75c;
+$green-completed: #00b75cb0;
 $menu-background: #1f1f1f50;
 $menu-item-hover: #50505050;
 $notification-warning: #9A7516;
 $notification-background: #9A751630;
+$important-task: #ffd90044;

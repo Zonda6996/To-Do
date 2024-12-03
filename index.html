@@ -46,6 +46,9 @@
 								>
 									Sort by priority
 								</button>
+								<button class="header__options-item" data-action="sort-by-date">
+									Sort by creation Date
+								</button>
 							</div>
 						</div>
 					</div>
@@ -56,13 +59,11 @@
 								name="search"
 								title="Search"
 								autocomplete="off"
-								id="header__search-input"
 								placeholder="Search for..."
+								id="header__search-input"
 							/>
 							<div class="header__search-buttons">
-								<button
-									class="header__search-button header__search-button-input--hidden"
-								>
+								<button class="header__search-button">
 									<img src="./image/icons/search.svg" alt="Search" />
 								</button>
 								<button class="header__search-clear">
@@ -107,7 +108,7 @@
 										<span class="checkbox__custom"></span>
 									</label>
 									<div class="todo-list-content">
-										<input type="text" value="Make a video" readonly />
+										<input class="task__text" type="text" value="Make a video" readonly />
 									</div>
 									<div class="todo-list__actions">
 										<button class="todo-list__edit">

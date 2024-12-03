@@ -3,3 +3,51 @@
 		width: 0;
 	}
 }
+
+@keyframes inputShow {
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes inputHide {
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes searchBtnRight {
+	100% {
+		right: 3px;
+	}
+}
+
+@keyframes searchBtnLeft {
+	100% {
+		right: 250px;
+		top: 8px;
+	}
+}
+
+@keyframes taskEditing {
+
+	0%,
+	50% {
+		opacity: 1;
+	}
+
+	50.01%,
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes taskCompleted {
+	0% {
+		left: 0%;
+	}
+
+	100% {
+		left: 90%;
+	}
+}

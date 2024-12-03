@@ -1,3 +1,5 @@
+@import './animations.scss';
+
 .header__search {
 	position: relative;
 	margin-left: 30px;
@@ -5,10 +7,22 @@
 
 .header__search-content {}
 
-.header__search-visible {
-	display: block !important;
+
+
+.header__search-button--right {
+	position: absolute;
+	top: 8px;
+	right: 250px;
+	z-index: 2;
+	animation: searchBtnRight 0.75s forwards;
+
+	@include highlightIcon(50%, 50%, 0, 0 !important)
 }
 
-.header__search-button-input--hidden {
-	position: static!important;
+.header__search-button--left {
+	position: absolute;
+	right: 2px;
+	top: 8px;
+	z-index: 2;
+	animation: searchBtnLeft 0.75s forwards;
 }

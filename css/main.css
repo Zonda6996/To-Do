@@ -143,8 +143,8 @@ body {
 }
 
 .header__title {
-  color: rgb(92, 6, 103);
-  margin-left: 10px;
+  color: #5c0667;
+  margin-left: 5px;
 }
 
 .header__logo img {
@@ -159,16 +159,24 @@ body {
 
 #options-dropdown {
   position: absolute;
-  z-index: 3;
-  display: none;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
   flex-direction: column;
   border: 1px solid rgba(80, 80, 80, 0.4117647059);
   border-radius: 5px;
   top: 40px;
   left: 0px;
+  z-index: 3;
   white-space: nowrap;
   background-color: #1f1f1f;
   box-shadow: 8px 8px 10px #000;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.header__options-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .header__options-item {
@@ -176,6 +184,9 @@ body {
   padding: 15px 15px 15px 37px;
   text-align: left;
   color: #eee;
+}
+.header__options-item:not(:last-child) {
+  border-bottom: 1px solid #778899;
 }
 .header__options-item:before {
   content: "";
@@ -188,11 +199,8 @@ body {
 .header__options-item:hover {
   background-color: rgba(80, 80, 80, 0.3137254902);
 }
-.header__options-item:first-child {
-  border-bottom: 1px solid #778899;
-}
-.header__options-item:last-child {
-  border-top: 1px solid #778899;
+.header__options-item:focus-visible {
+  box-shadow: 0px 0px 0px 1px #fff;
 }
 .header__options-item[data-action=clear-completed-tasks]::before {
   content: "";
@@ -209,14 +217,56 @@ body {
   background: url(../image/icons/sort-prtiority-dd.svg) 0px 0px no-repeat;
   background-size: cover;
 }
-
-.header__options-visible {
-  display: flex !important;
+.header__options-item[data-action=sort-by-date]::before {
+  content: "";
+  background: url(../image/icons/sort-by-creation-date.svg) 0px 0px no-repeat;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  bottom: 9px;
+  left: 2px;
 }
 
 @keyframes progressBar {
   100% {
     width: 0;
+  }
+}
+@keyframes inputShow {
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes inputHide {
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes searchBtnRight {
+  100% {
+    right: 3px;
+  }
+}
+@keyframes searchBtnLeft {
+  100% {
+    right: 250px;
+    top: 8px;
+  }
+}
+@keyframes taskEditing {
+  0%, 50% {
+    opacity: 1;
+  }
+  50.01%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes taskCompleted {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 90%;
   }
 }
 #notification-container {
@@ -293,17 +343,83 @@ body {
   opacity: 0.1;
 }
 
+@keyframes progressBar {
+  100% {
+    width: 0;
+  }
+}
+@keyframes inputShow {
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes inputHide {
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes searchBtnRight {
+  100% {
+    right: 3px;
+  }
+}
+@keyframes searchBtnLeft {
+  100% {
+    right: 250px;
+    top: 8px;
+  }
+}
+@keyframes taskEditing {
+  0%, 50% {
+    opacity: 1;
+  }
+  50.01%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes taskCompleted {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 90%;
+  }
+}
 .header__search {
   position: relative;
   margin-left: 30px;
 }
 
-.header__search-visible {
-  display: block !important;
+.header__search-button--right {
+  position: absolute;
+  top: 8px;
+  right: 250px;
+  z-index: 2;
+  animation: searchBtnRight 0.75s forwards;
+}
+.header__search-button--right::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0 !important;
+  border-radius: 5px;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.header__search-button--right:hover::before {
+  opacity: 0.1;
 }
 
-.header__search-button-input--hidden {
-  position: static !important;
+.header__search-button--left {
+  position: absolute;
+  right: 2px;
+  top: 8px;
+  z-index: 2;
+  animation: searchBtnLeft 0.75s forwards;
 }
 
 .todo-create {
@@ -318,25 +434,64 @@ body {
   justify-content: space-between;
 }
 
+@keyframes progressBar {
+  100% {
+    width: 0;
+  }
+}
+@keyframes inputShow {
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes inputHide {
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes searchBtnRight {
+  100% {
+    right: 3px;
+  }
+}
+@keyframes searchBtnLeft {
+  100% {
+    right: 250px;
+    top: 8px;
+  }
+}
+@keyframes taskEditing {
+  0%, 50% {
+    opacity: 1;
+  }
+  50.01%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes taskCompleted {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 90%;
+  }
+}
 .todo-list {
   margin-top: 30px;
 }
 
-.todo-list__item-selected {
-  background-color: rgb(18, 29, 78) !important;
-}
-
 .todo-list__item {
+  position: relative;
   display: flex;
-  max-width: 650px;
+  max-width: 620px;
   justify-content: center;
   text-align: center;
   align-items: center;
   margin-bottom: 20px;
   padding: 20px 10px 20px 20px;
-  background-color: rgb(11, 18, 49);
+  background-color: #0b1231;
   box-shadow: 5px 5px 10px 3px #000;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, opacity 0.2s ease, max-width 0.2s ease, margin-left 0.2s ease;
 }
 .todo-list__item .todo-list-content {
   flex: 1 1 0%;
@@ -346,7 +501,70 @@ body {
   display: block;
 }
 .todo-list__item:hover {
-  background-color: rgb(16, 25, 70);
+  background-color: #101946;
+}
+.todo-list__item:hover button {
+  opacity: 1;
+  visibility: visible;
+}
+
+.todo-list__item-editing {
+  position: relative;
+}
+.todo-list__item-editing::after {
+  content: "";
+  position: absolute;
+  border-bottom: 2px solid #778899 !important;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  opacity: 1;
+  z-index: 20;
+  animation: taskEditing 1s steps(1) infinite;
+}
+.todo-list__item-editing.todo-list__task-completed {
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+.todo-list__item-important {
+  position: relative;
+}
+.todo-list__item-important::after {
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid rgba(255, 217, 0, 0.2666666667) !important;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  z-index: 0;
+}
+.todo-list__item-important.todo-list__item-editing::after {
+  content: "";
+  border-bottom: 2px solid #778899 !important;
+  height: 2px;
+  z-index: 1;
+  animation: taskEditing 1s steps(1) infinite;
+}
+
+.todo-list__item-selected {
+  background-color: rgb(18, 29, 78) !important;
+}
+
+.todo-list__item-placeholder {
+  max-width: 620px;
+  margin-bottom: 20px;
+  background-color: #778899;
+  box-shadow: 5px 5px 10px 3px #000;
+  opacity: 0.25;
+}
+
+.todo-list__item-inactive {
+  opacity: 0.5;
+  max-width: 550px;
+  margin-left: 35px;
 }
 
 .todo-list-content {
@@ -355,23 +573,33 @@ body {
 .todo-list-content input {
   width: 97%;
 }
+.todo-list-content input:-moz-read-only {
+  cursor: default;
+}
+.todo-list-content input:read-only {
+  cursor: default;
+}
+
+.todo-list__task-completed {
+  text-decoration: line-through;
+  color: #778899;
+}
 
 .todo-list__actions {
   display: flex;
   align-items: center;
+  transition: opacity 0.2s ease;
+}
+.todo-list__actions button {
+  opacity: 0;
+  visibility: hidden;
 }
 .todo-list__actions img {
   width: 20px;
   height: 20px;
 }
-
-.important__button_active {
-  position: relative;
-  background: url(../image/icons/important-mark-active.svg) no-repeat;
-  background-size: cover;
-  width: 40px;
-  height: 40px;
-  z-index: 3;
+.todo-list__actions button:focus-visible {
+  box-shadow: 0px 0px 0px 1px #fff;
 }
 
 #header__options-button {
@@ -397,6 +625,9 @@ body {
 }
 #header__options-button:hover::before {
   opacity: 0.1;
+}
+#header__options-button:focus-visible {
+  box-shadow: 0px 0px 0px 1px #fff;
 }
 #header__options-button::before {
   content: "";
@@ -426,8 +657,16 @@ body {
   transition: outline 0.5s ease, color 0.5s ease;
 }
 #todo-create__form-submit:hover {
-  outline: solid 1.6px rgb(225, 1, 255);
+  outline: solid 1.6px #e101ff;
   color: #cecece;
+}
+#todo-create__form-submit:focus {
+  outline: solid 1.6px #e101ff;
+}
+#todo-create__form-submit:active {
+  opacity: 0.85;
+  outline: solid 1.6px #ad0dc3;
+  transition: none;
 }
 
 .header__search-buttons {
@@ -437,12 +676,29 @@ body {
 .header__search-button {
   position: absolute;
   top: 8px;
-  right: 3px;
-  z-index: 2;
 }
 .header__search-button img {
   width: 24px;
   height: 24px;
+}
+.header__search-button:focus-visible {
+  box-shadow: 0px 0px 0px 1px #fff;
+}
+.header__search-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.header__search-button:hover::before {
+  opacity: 0.1;
 }
 
 .header__search-clear {
@@ -456,8 +712,27 @@ body {
   width: 24px;
   height: 24px;
 }
+.header__search-clear:focus-visible {
+  box-shadow: 0px 0px 0px 1px #fff;
+}
 .header__search-clear.header__search-clear--visible {
   display: block;
+}
+.header__search-clear.header__search-clear--visible::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.header__search-clear.header__search-clear--visible:hover::before {
+  opacity: 0.1;
 }
 
 .todo-list__edit {
@@ -530,19 +805,75 @@ body {
   opacity: 0.1;
 }
 
+.important__button_active {
+  position: relative;
+  background: url(../image/icons/important-mark-active.svg) no-repeat;
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  z-index: 3;
+}
+
+.important__button-active--visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+@keyframes progressBar {
+  100% {
+    width: 0;
+  }
+}
+@keyframes inputShow {
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes inputHide {
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes searchBtnRight {
+  100% {
+    right: 3px;
+  }
+}
+@keyframes searchBtnLeft {
+  100% {
+    right: 250px;
+    top: 8px;
+  }
+}
+@keyframes taskEditing {
+  0%, 50% {
+    opacity: 1;
+  }
+  50.01%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes taskCompleted {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 90%;
+  }
+}
 #todo-create__form-input-text {
   padding: 15px;
   border-radius: 20px;
-  border: 1px solid rgb(92, 6, 103);
+  border: 1px solid #5c0667;
   box-shadow: 2px 3px 13px 0px #000;
   color: #fff;
   transition: border 0.5s ease-in, padding-right 0.5s ease, background-color 0.5s ease, box-shadow 0.5s ease-in;
 }
 #todo-create__form-input-text:focus {
   padding-right: 50px;
-  border: 1.5px solid rgb(173, 13, 195);
-  background-color: rgba(82, 0, 102, 0.411);
-  box-shadow: 5px 5px 11px 0px rgba(82, 0, 102, 0.411);
+  border: 1.5px solid #ad0dc3;
+  background-color: rgba(82, 0, 102, 0.4117647059);
+  box-shadow: 5px 5px 11px 0px rgba(82, 0, 102, 0.4117647059);
 }
 #todo-create__form-input-text:focus::-moz-placeholder {
   opacity: 0.75;
@@ -551,7 +882,7 @@ body {
   opacity: 0.75;
 }
 #todo-create__form-input-text:hover {
-  background-color: rgba(82, 0, 102, 0.411);
+  background-color: rgba(82, 0, 102, 0.4117647059);
 }
 
 input[type=checkbox] {
@@ -567,39 +898,54 @@ input[type=checkbox] {
   height: 25px;
   border-radius: 50%;
   border: 2px solid #778899;
+  transition: border-color 0.4s ease;
 }
 .checkbox__custom:after {
   content: "";
   position: absolute;
-  left: 7.8px;
-  top: 3.5px;
-  width: 6.5px;
-  height: 12px;
+  left: 8.2px;
+  top: 3.1px;
+  width: 6.4px;
+  height: 13px;
   border: solid #778899;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  transition: border-color 0.4s ease, opacity 0.4s ease;
+}
+.checkbox__custom:hover {
+  border-color: rgba(0, 183, 92, 0.6901960784);
 }
 
+input:checked ~ .checkbox__custom {
+  border-color: rgba(0, 183, 92, 0.6901960784);
+}
 input:checked ~ .checkbox__custom:after {
   opacity: 1;
+  border: solid rgba(0, 183, 92, 0.6901960784);
+  border-width: 0 2px 2px 0;
 }
 
 #header__search-input {
-  display: none;
   position: relative;
+  opacity: 0;
+  visibility: hidden;
   padding: 10px 60px 9px 10px;
   border: 1px solid rgba(119, 136, 153, 0.3137254902);
   border-bottom: 1px solid #778899;
   z-index: 1;
+  transition: opacity 0.75s ease, visibility 0.75s ease;
 }
 #header__search-input:focus {
-  border-bottom: 1px solid rgb(173, 13, 195);
+  border-bottom: 1px solid #ad0dc3;
 }
 #header__search-input:focus::-moz-placeholder {
   opacity: 0.75;
 }
 #header__search-input:focus::placeholder {
   opacity: 0.75;
+}
+#header__search-input.visible {
+  opacity: 1;
+  visibility: visible;
 }
